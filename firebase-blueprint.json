@@ -1,0 +1,567 @@
+{
+  "entities": {
+    "WebsiteApp": {
+      "title": "WebsiteApp",
+      "description": "Independent STORE PRO website application listing. Never synchronized with Android app collections and never stores direct APK URLs.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique document identifier for the website app.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Application display name.",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "slug": {
+          "type": "string",
+          "description": "SEO-friendly URL slug.",
+          "minLength": 1,
+          "maxLength": 140,
+          "pattern": "^[a-z0-9\\-]+$"
+        },
+        "iconUrl": {
+          "type": "string",
+          "description": "Application icon URL or compressed data URI.",
+          "minLength": 1,
+          "maxLength": 350000
+        },
+        "screenshots": {
+          "type": "array",
+          "description": "Up to 8 screenshot image URLs or compressed data URIs."
+        },
+        "version": {
+          "type": "string",
+          "description": "Application version string.",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "size": {
+          "type": "string",
+          "description": "Human-readable package size.",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "developerName": {
+          "type": "string",
+          "description": "Publisher or developer name.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "category": {
+          "type": "string",
+          "description": "Website category name.",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "shortDescription": {
+          "type": "string",
+          "description": "Concise summary shown on app cards.",
+          "minLength": 1,
+          "maxLength": 220
+        },
+        "fullDescription": {
+          "type": "string",
+          "description": "Detailed application description.",
+          "minLength": 1,
+          "maxLength": 6000
+        },
+        "features": {
+          "type": "array",
+          "description": "List of application feature highlights (max 20)."
+        },
+        "whatsNew": {
+          "type": "string",
+          "description": "Release changelog notes.",
+          "maxLength": 2500
+        },
+        "uploadDate": {
+          "type": "string",
+          "description": "Initial upload date string (YYYY-MM-DD).",
+          "minLength": 1,
+          "maxLength": 30
+        },
+        "updatedDate": {
+          "type": "string",
+          "description": "Last updated date string (YYYY-MM-DD).",
+          "minLength": 1,
+          "maxLength": 30
+        },
+        "status": {
+          "type": "string",
+          "description": "Publication visibility status.",
+          "enum": ["published", "unpublished", "draft"]
+        },
+        "isFeatured": {
+          "type": "boolean",
+          "description": "Featured showcase flag."
+        },
+        "isTrending": {
+          "type": "boolean",
+          "description": "Trending showcase flag."
+        },
+        "isPopular": {
+          "type": "boolean",
+          "description": "Popular showcase flag."
+        },
+        "downloadCount": {
+          "type": "number",
+          "description": "Cumulative INSTALL button click count."
+        },
+        "viewCount": {
+          "type": "number",
+          "description": "Cumulative app detail page view count."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "UID of administrator who created the listing.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server creation timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server update timestamp."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "slug",
+        "iconUrl",
+        "screenshots",
+        "version",
+        "size",
+        "developerName",
+        "category",
+        "shortDescription",
+        "fullDescription",
+        "features",
+        "whatsNew",
+        "uploadDate",
+        "updatedDate",
+        "status",
+        "isFeatured",
+        "isTrending",
+        "isPopular",
+        "downloadCount",
+        "viewCount",
+        "createdBy",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "WebsiteCategory": {
+      "title": "WebsiteCategory",
+      "description": "Independent website application category.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "slug": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80,
+          "pattern": "^[a-z0-9\\-]+$"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "iconName": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "displayOrder": {
+          "type": "number"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "slug",
+        "description",
+        "iconName",
+        "displayOrder",
+        "isActive",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "WebsiteBanner": {
+      "title": "WebsiteBanner",
+      "description": "Promotional hero or editorial banner managed for the website.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "subtitle": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "imageUrl": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 350000
+        },
+        "ctaLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "targetAppId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "targetRoute": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "displayOrder": {
+          "type": "number"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "subtitle",
+        "imageUrl",
+        "ctaLabel",
+        "targetAppId",
+        "targetRoute",
+        "displayOrder",
+        "isActive",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "WebsiteUser": {
+      "title": "WebsiteUser",
+      "description": "Website user account with isolated PII and personal library data.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "displayName": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "photoURL": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "savedAppIds": {
+          "type": "array"
+        },
+        "favoriteAppIds": {
+          "type": "array"
+        },
+        "browsingHistory": {
+          "type": "array"
+        },
+        "searchHistory": {
+          "type": "array"
+        },
+        "notificationsEnabled": {
+          "type": "boolean"
+        },
+        "compactMode": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "uid",
+        "email",
+        "displayName",
+        "photoURL",
+        "savedAppIds",
+        "favoriteAppIds",
+        "browsingHistory",
+        "searchHistory",
+        "notificationsEnabled",
+        "compactMode",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "WebsiteAdmin": {
+      "title": "WebsiteAdmin",
+      "description": "Authorized website administrator record.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "email": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "displayName": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "addedBy": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "email", "displayName", "addedBy", "createdAt"]
+    },
+    "WebsiteSettings": {
+      "title": "WebsiteSettings",
+      "description": "Centralized website configuration including STORE_PRO_DOWNLOAD_URL, branding, SEO, and live STORE PRO release notes.",
+      "type": "object",
+      "properties": {
+        "storeProDownloadUrl": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "websiteName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "websiteLogoUrl": {
+          "type": "string",
+          "maxLength": 350000
+        },
+        "websiteDescription": {
+          "type": "string",
+          "maxLength": 300
+        },
+        "themeAccent": {
+          "type": "string",
+          "maxLength": 30
+        },
+        "contactEmail": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "supportUrl": {
+          "type": "string",
+          "maxLength": 300
+        },
+        "twitterUrl": {
+          "type": "string",
+          "maxLength": 300
+        },
+        "telegramUrl": {
+          "type": "string",
+          "maxLength": 300
+        },
+        "githubUrl": {
+          "type": "string",
+          "maxLength": 300
+        },
+        "seoTitle": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "seoDescription": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "seoKeywords": {
+          "type": "string",
+          "maxLength": 300
+        },
+        "latestStoreProVersion": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "latestStoreProVersionName": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "latestReleaseNotes": {
+          "type": "string",
+          "maxLength": 3000
+        },
+        "latestReleaseDate": {
+          "type": "string",
+          "maxLength": 30
+        },
+        "updateHistory": {
+          "type": "array"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "storeProDownloadUrl",
+        "websiteName",
+        "websiteLogoUrl",
+        "websiteDescription",
+        "themeAccent",
+        "contactEmail",
+        "supportUrl",
+        "twitterUrl",
+        "telegramUrl",
+        "githubUrl",
+        "seoTitle",
+        "seoDescription",
+        "seoKeywords",
+        "latestStoreProVersion",
+        "latestStoreProVersionName",
+        "latestReleaseNotes",
+        "latestReleaseDate",
+        "updateHistory",
+        "updatedAt"
+      ]
+    },
+    "WebsiteAnalyticsEvent": {
+      "title": "WebsiteAnalyticsEvent",
+      "description": "Immutable website analytics event separating views, INSTALL clicks, and STORE PRO APK redirects.",
+      "type": "object",
+      "properties": {
+        "eventType": {
+          "type": "string",
+          "enum": ["app_view", "install_click", "storepro_redirect"]
+        },
+        "appId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "appName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "category": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "userId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "dateKey": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "eventType",
+        "appId",
+        "appName",
+        "category",
+        "userId",
+        "dateKey",
+        "createdAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/website_apps/{appId}": {
+      "schema": { "$ref": "#/entities/WebsiteApp" },
+      "description": "Manually curated website application listings."
+    },
+    "/website_categories/{categoryId}": {
+      "schema": { "$ref": "#/entities/WebsiteCategory" },
+      "description": "Website marketplace categories."
+    },
+    "/website_banners/{bannerId}": {
+      "schema": { "$ref": "#/entities/WebsiteBanner" },
+      "description": "Website promotional banners."
+    },
+    "/website_users/{userId}": {
+      "schema": { "$ref": "#/entities/WebsiteUser" },
+      "description": "Website user profile, saved library, favorites, and browsing/search history."
+    },
+    "/website_admins/{adminUid}": {
+      "schema": { "$ref": "#/entities/WebsiteAdmin" },
+      "description": "Website administrator authorization records."
+    },
+    "/website_settings/{settingId}": {
+      "schema": { "$ref": "#/entities/WebsiteSettings" },
+      "description": "Centralized website configuration (global doc)."
+    },
+    "/website_analytics/{eventId}": {
+      "schema": { "$ref": "#/entities/WebsiteAnalyticsEvent" },
+      "description": "Website analytics event log for views, INSTALL clicks, and STORE PRO redirects."
+    }
+  }
+}

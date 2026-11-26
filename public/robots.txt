@@ -1,0 +1,11 @@
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /?view=admin
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /?view=admin
+
+Sitemap: https://store-pro-independent-app-marketplace.ai.studio/sitemap.xml

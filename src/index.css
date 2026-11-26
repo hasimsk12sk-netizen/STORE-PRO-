@@ -1,0 +1,556 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Outfit", system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background-color: #f4f5f7;
+    color: #0b0d12;
+    scroll-behavior: smooth;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ==========================================================================
+   STORE PRO — Light Canvas + Extreme 3D Machined-Charcoal Block System
+   RGB Palette: #00FF66 (Green), #00E5FF (Cyan), #287BFF (Blue),
+                #A020F0 (Purple), #FFD700 (Gold)
+   ========================================================================== */
+
+@layer components {
+  .sp-light-canvas {
+    background: linear-gradient(180deg, #f8f9fb 0%, #f4f5f7 48%, #e6e9f0 100%);
+  }
+
+  @keyframes sp-rgb-sheen {
+    0%,
+    100% {
+      opacity: 0.78;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  .sp-cv-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 340px;
+  }
+
+  /* Extreme 3D Charcoal Block: thick raised beveled outer wall, deep sunken hollow
+     center cavity, heavy multi-layered drop/ambient/contact shadows, and animated RGB edge glow */
+  .sp-rgb-card {
+    position: relative;
+    isolation: isolate;
+    contain: layout style;
+    background: linear-gradient(
+      155deg,
+      #2f3546 0%,
+      #1f232f 26%,
+      #141720 62%,
+      #0b0d13 100%
+    );
+    color: #f7f8fa;
+    border-radius: 1.5rem;
+    border-top: 2px solid rgba(255, 255, 255, 0.24);
+    border-left: 2px solid rgba(255, 255, 255, 0.14);
+    border-right: 2px solid rgba(0, 0, 0, 0.92);
+    border-bottom: 3px solid rgba(0, 0, 0, 0.98);
+    box-shadow:
+      0 46px 82px -12px rgba(4, 6, 12, 0.58),
+      0 26px 44px -8px rgba(4, 6, 12, 0.48),
+      0 12px 22px -4px rgba(4, 6, 12, 0.38),
+      0 4px 8px -1px rgba(4, 6, 12, 0.32),
+      0 10px 36px -8px rgba(0, 229, 255, 0.24),
+      0 6px 32px -10px rgba(160, 32, 240, 0.22),
+      inset 0 2px 2px rgba(255, 255, 255, 0.22),
+      inset 0 -6px 12px rgba(0, 0, 0, 0.94);
+    transition:
+      transform 180ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Raised RGB glowing perimeter along outer charcoal wall (GPU-composited) */
+  .sp-rgb-card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 3px;
+    background: linear-gradient(
+      125deg,
+      #00ff66 0%,
+      #00e5ff 22%,
+      #287bff 46%,
+      #a020f0 70%,
+      #ffd700 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.9;
+    transition: opacity 180ms ease;
+  }
+
+  /* Deeply recessed central charcoal cavity stepped ~11px inward from outer rim */
+  .sp-rgb-card::after {
+    content: "";
+    position: absolute;
+    inset: 11px;
+    border-radius: calc(1.5rem - 9px);
+    background: linear-gradient(
+      180deg,
+      #030406 0%,
+      #06070c 42%,
+      #0a0c13 100%
+    );
+    border-top: 1px solid rgba(0, 0, 0, 0.98);
+    border-left: 1px solid rgba(0, 0, 0, 0.92);
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1.5px solid rgba(255, 255, 255, 0.14);
+    box-shadow:
+      inset 0 18px 28px -4px rgba(0, 0, 0, 0.98),
+      inset 0 6px 12px rgba(0, 0, 0, 1),
+      inset 10px 0 18px -4px rgba(0, 0, 0, 0.9),
+      inset -10px 0 18px -4px rgba(0, 0, 0, 0.9),
+      inset 0 -10px 18px -4px rgba(0, 0, 0, 0.85),
+      0 -1px 0 rgba(0, 0, 0, 0.96),
+      0 1.5px 0 rgba(255, 255, 255, 0.14);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .sp-rgb-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Slimmer 3D machined-charcoal dock for compact bars (bottom nav & status strips) */
+  .sp-rgb-dock {
+    position: relative;
+    isolation: isolate;
+    contain: layout style;
+    background: linear-gradient(160deg, #2b3040 0%, #161923 55%, #0c0e14 100%);
+    color: #f7f8fa;
+    border-radius: 1.15rem;
+    border-top: 1.5px solid rgba(255, 255, 255, 0.22);
+    border-bottom: 2.5px solid rgba(0, 0, 0, 0.96);
+    box-shadow:
+      0 26px 48px -10px rgba(4, 6, 12, 0.62),
+      0 12px 22px -6px rgba(4, 6, 12, 0.48),
+      0 0 26px -6px rgba(0, 229, 255, 0.28),
+      inset 0 1.5px 1px rgba(255, 255, 255, 0.2),
+      inset 0 -4px 8px rgba(0, 0, 0, 0.9);
+  }
+
+  .sp-rgb-dock::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 2.25px;
+    background: linear-gradient(
+      125deg,
+      #00ff66 0%,
+      #00e5ff 24%,
+      #287bff 48%,
+      #a020f0 74%,
+      #ffd700 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.92;
+  }
+
+  .sp-rgb-dock::after {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border-radius: calc(1.15rem - 4px);
+    background: linear-gradient(180deg, #040508 0%, #090b12 100%);
+    border-top: 1px solid rgba(0, 0, 0, 0.96);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow:
+      inset 0 8px 14px rgba(0, 0, 0, 0.95),
+      inset 0 -4px 8px rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .sp-rgb-dock > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Deep recessed inner well for framed media & focal content panels */
+  .sp-card-recessed {
+    background: linear-gradient(180deg, #020305 0%, #06070c 100%);
+    border-top: 1px solid rgba(0, 0, 0, 0.98);
+    border-left: 1px solid rgba(0, 0, 0, 0.92);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1.5px solid rgba(255, 255, 255, 0.14);
+    box-shadow:
+      inset 0 16px 28px rgba(0, 0, 0, 0.96),
+      inset 0 5px 10px rgba(0, 0, 0, 0.98),
+      inset 8px 0 16px rgba(0, 0, 0, 0.86),
+      inset -8px 0 16px rgba(0, 0, 0, 0.86),
+      0 1.5px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  @media (hover: hover) {
+    .sp-rgb-card-hover:hover {
+      transform: translate3d(0, -6px, 0);
+      box-shadow:
+        0 54px 92px -12px rgba(4, 6, 12, 0.66),
+        0 32px 52px -8px rgba(4, 6, 12, 0.54),
+        0 14px 24px -4px rgba(4, 6, 12, 0.44),
+        0 0 38px -4px rgba(0, 229, 255, 0.36),
+        0 0 36px -6px rgba(160, 32, 240, 0.32),
+        inset 0 2.5px 2px rgba(255, 255, 255, 0.28),
+        inset 0 -6px 12px rgba(0, 0, 0, 0.96);
+    }
+
+    .sp-rgb-card-hover:hover::before {
+      opacity: 1;
+    }
+  }
+
+  .sp-rgb-card-hover:active {
+    transform: translate3d(0, 1px, 0) scale(0.992);
+  }
+
+  .sp-rgb-hero::before {
+    padding: 3.5px;
+    animation: sp-rgb-sheen 4.5s ease-in-out infinite;
+  }
+
+  /* Raised 3D Charcoal RGB Action Button with inward press depth */
+  .sp-rgb-btn {
+    position: relative;
+    background: linear-gradient(160deg, #272c3c 0%, #141720 48%, #090a0f 100%);
+    color: #ffffff;
+    border-radius: 0.9rem;
+    border-top: 1.5px solid rgba(255, 255, 255, 0.24);
+    border-bottom: 2.5px solid rgba(0, 0, 0, 0.96);
+    box-shadow:
+      0 16px 28px -6px rgba(4, 6, 12, 0.62),
+      0 6px 12px -2px rgba(4, 6, 12, 0.45),
+      0 0 18px -4px rgba(0, 229, 255, 0.24),
+      inset 0 1.5px 1px rgba(255, 255, 255, 0.22),
+      inset 0 -3px 6px rgba(0, 0, 0, 0.85);
+    transition:
+      transform 150ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 150ms ease;
+  }
+
+  .sp-rgb-btn::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(
+      120deg,
+      #00ff66 0%,
+      #00e5ff 26%,
+      #287bff 52%,
+      #a020f0 76%,
+      #ffd700 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.94;
+  }
+
+  @media (hover: hover) {
+    .sp-rgb-btn:hover {
+      transform: translate3d(0, -2.5px, 0);
+      box-shadow:
+        0 20px 34px -6px rgba(4, 6, 12, 0.72),
+        0 8px 14px -2px rgba(4, 6, 12, 0.5),
+        0 0 24px -4px rgba(0, 229, 255, 0.42),
+        0 0 22px -6px rgba(255, 215, 0, 0.32),
+        inset 0 2px 1px rgba(255, 255, 255, 0.28);
+    }
+  }
+
+  .sp-rgb-btn:active {
+    transform: translate3d(0, 2px, 0) scale(0.975);
+    box-shadow:
+      0 6px 12px -4px rgba(4, 6, 12, 0.6),
+      inset 0 4px 10px rgba(0, 0, 0, 0.92);
+  }
+
+  /* Primary INSTALL Button with enhanced Gold + RGB 3D elevation */
+  .sp-install-btn {
+    position: relative;
+    background: linear-gradient(155deg, #2b3042 0%, #161923 48%, #08090e 100%);
+    color: #ffd700;
+    border-radius: 0.9rem;
+    border-top: 1.5px solid rgba(255, 215, 0, 0.34);
+    border-bottom: 2.5px solid rgba(0, 0, 0, 0.98);
+    box-shadow:
+      0 18px 32px -6px rgba(0, 0, 0, 0.7),
+      0 6px 12px -2px rgba(0, 0, 0, 0.5),
+      0 0 22px -4px rgba(0, 255, 102, 0.32),
+      0 0 24px -6px rgba(255, 215, 0, 0.36),
+      inset 0 1.5px 1px rgba(255, 215, 0, 0.3),
+      inset 0 -3px 6px rgba(0, 0, 0, 0.88);
+    transition:
+      transform 160ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 160ms ease;
+  }
+
+  .sp-install-btn::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 2.25px;
+    background: linear-gradient(
+      115deg,
+      #00ff66 0%,
+      #00e5ff 28%,
+      #287bff 54%,
+      #a020f0 76%,
+      #ffd700 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    animation: sp-rgb-sheen 4s ease-in-out infinite;
+  }
+
+  @media (hover: hover) {
+    .sp-install-btn:hover {
+      transform: translate3d(0, -2.5px, 0);
+      box-shadow:
+        0 22px 38px -6px rgba(0, 0, 0, 0.78),
+        0 8px 16px -2px rgba(0, 0, 0, 0.56),
+        0 0 28px -4px rgba(0, 229, 255, 0.46),
+        0 0 28px -4px rgba(255, 215, 0, 0.46);
+    }
+  }
+
+  .sp-install-btn:active {
+    transform: translate3d(0, 2px, 0) scale(0.975);
+    box-shadow:
+      0 6px 12px -4px rgba(0, 0, 0, 0.65),
+      inset 0 4px 10px rgba(0, 0, 0, 0.94);
+  }
+
+  /* Identical Extreme 3D Charcoal Social Community Buttons (WhatsApp + Telegram) */
+  .sp-social-btn {
+    position: relative;
+    isolation: isolate;
+    contain: layout style;
+    background: linear-gradient(
+      155deg,
+      #2f3546 0%,
+      #1a1e29 36%,
+      #0e1017 78%,
+      #08090e 100%
+    );
+    color: #ffffff;
+    border-radius: 1rem;
+    border-top: 2px solid rgba(255, 255, 255, 0.25);
+    border-left: 1.5px solid rgba(255, 255, 255, 0.14);
+    border-right: 1.5px solid rgba(0, 0, 0, 0.92);
+    border-bottom: 3px solid rgba(0, 0, 0, 0.98);
+    box-shadow:
+      0 26px 42px -6px rgba(0, 0, 0, 0.85),
+      0 14px 22px -4px rgba(0, 0, 0, 0.74),
+      0 6px 10px -1px rgba(0, 0, 0, 0.65),
+      0 0 22px -6px rgba(0, 229, 255, 0.3),
+      0 0 20px -6px rgba(160, 32, 240, 0.26),
+      inset 0 2px 1.5px rgba(255, 255, 255, 0.24),
+      inset 0 -4px 8px rgba(0, 0, 0, 0.96);
+    transition:
+      transform 150ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .sp-social-btn::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 2.5px;
+    background: linear-gradient(
+      120deg,
+      #00ff66 0%,
+      #00e5ff 24%,
+      #287bff 48%,
+      #a020f0 74%,
+      #ffd700 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.92;
+    animation: sp-rgb-sheen 3.8s ease-in-out infinite;
+    transition: opacity 150ms ease;
+  }
+
+  .sp-social-btn::after {
+    content: "";
+    position: absolute;
+    inset: 4.5px;
+    border-radius: calc(1rem - 4px);
+    background: linear-gradient(180deg, #040508 0%, #090b12 60%, #0d1019 100%);
+    border-top: 1px solid rgba(0, 0, 0, 0.98);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow:
+      inset 0 8px 14px rgba(0, 0, 0, 0.96),
+      inset 0 -3px 6px rgba(0, 0, 0, 0.84),
+      0 1px 0 rgba(255, 255, 255, 0.12);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .sp-social-btn > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (hover: hover) {
+    .sp-social-btn:hover {
+      transform: translate3d(0, -3px, 0);
+      box-shadow:
+        0 30px 50px -6px rgba(0, 0, 0, 0.9),
+        0 16px 26px -4px rgba(0, 0, 0, 0.8),
+        0 0 28px -4px rgba(0, 229, 255, 0.45),
+        0 0 26px -4px rgba(160, 32, 240, 0.36),
+        inset 0 2px 2px rgba(255, 255, 255, 0.3),
+        inset 0 -4px 8px rgba(0, 0, 0, 0.96);
+    }
+
+    .sp-social-btn:hover::before {
+      opacity: 1;
+    }
+  }
+
+  .sp-social-btn:active {
+    transform: translate3d(0, 2.5px, 0) scale(0.975);
+    box-shadow:
+      0 8px 16px -4px rgba(0, 0, 0, 0.78),
+      inset 0 5px 12px rgba(0, 0, 0, 0.96);
+  }
+
+  /* Identical RGB Illuminated Logo Medallion for WhatsApp & Telegram (GPU-composited) */
+  .sp-social-logo-wrap {
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    padding: 2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: linear-gradient(
+      135deg,
+      #00ff66 0%,
+      #00e5ff 26%,
+      #287bff 52%,
+      #a020f0 76%,
+      #ffd700 100%
+    );
+    animation: sp-rgb-sheen 3.6s ease-in-out infinite;
+  }
+
+  .sp-social-logo-whatsapp {
+    box-shadow:
+      0 0 14px -2px rgba(37, 211, 102, 0.65),
+      0 0 16px -4px rgba(0, 229, 255, 0.45);
+  }
+
+  .sp-social-logo-telegram {
+    box-shadow:
+      0 0 14px -2px rgba(34, 158, 217, 0.7),
+      0 0 16px -4px rgba(160, 32, 240, 0.45);
+  }
+
+  /* Active bottom-bar RGB aura */
+  .sp-nav-glow {
+    box-shadow:
+      0 0 20px -2px rgba(0, 229, 255, 0.55),
+      0 0 18px -4px rgba(160, 32, 240, 0.48),
+      0 0 14px -4px rgba(255, 215, 0, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  /* Dark input styling inside deeply recessed charcoal cards */
+  .sp-dark-input {
+    background-color: #0b0d14;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.85);
+    color: #f7f8fa;
+  }
+  .sp-dark-input::placeholder {
+    color: #7c8396;
+  }
+  .sp-dark-input:focus {
+    outline: none;
+    border-color: #00e5ff;
+    box-shadow:
+      inset 0 3px 8px rgba(0, 0, 0, 0.85),
+      0 0 0 2px rgba(0, 229, 255, 0.22);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-rgb-card::before,
+  .sp-rgb-dock::before,
+  .sp-rgb-hero::before,
+  .sp-rgb-btn::before,
+  .sp-install-btn::before,
+  .sp-social-btn::before,
+  .sp-social-logo-wrap {
+    animation: none;
+  }
+  .sp-rgb-card,
+  .sp-rgb-btn,
+  .sp-install-btn,
+  .sp-social-btn {
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Hide scrollbars cleanly in horizontal carousels while preserving scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -1,0 +1,6 @@
+{
+  "name": "STORE PRO — Independent App Marketplace",
+  "description": "Independent premium application marketplace powered by STORE PRO with centralized official Android APK distribution and deep-link routing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
